@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
-// import { useData } from "../context/DataProvider";
+import { useData } from "../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../constants/Constants";
 
 function Dashboard(props) {
   const { onLogout } = props;
-  // const { userHeaders } = useData();
+  const { userHeaders } = useData();
   const [userList, setUserList] = useState([]);
 
   const getUsers = async () => {
-    
+    try {
+      const response = await axios.get(`${API_URL}/users`, { headers: userHeaders });
+      const users = response.data.data;
+      setUserList(users);
+    } catch (error) {
+      if(error.response.data.errors) {
+        return alert("Cannot get users");
+      }
+    }
   }
+
+  useEffect(() => {
+    if(userList.length === 0) {
+      getUsers();
+    }
+  })
 
   return (
     <div style={{ textAlign: "center" }}>

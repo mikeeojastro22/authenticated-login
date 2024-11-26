@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-// import DataProvider from "./context/DataProvider";
+import DataProvider from "./context/DataProvider";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,7 +16,7 @@ function App() {
   };
 
   return (
-    // <DataProvider>
+    <DataProvider>
       <BrowserRouter>
         <Routes>
           {/* Upon first loading of the app, this will be loaded first */}
@@ -39,7 +39,7 @@ function App() {
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
-    // </DataProvider>
+    </DataProvider>
   );
 }
 
