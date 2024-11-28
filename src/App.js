@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import DataProvider from "./context/DataProvider";
+import Message from "./pages/Message";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,6 +31,16 @@ function App() {
             element={
               isAuthenticated ? (
                 <Dashboard onLogout={handleLogout} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/message"
+            element={
+              isAuthenticated ? (
+                <Message />
               ) : (
                 <Navigate to="/login" />
               )
